@@ -31,11 +31,15 @@ func main() {
 	go http.ListenAndServe(":"+port, nil)
 
 	for update := range updates {
+
 		var message tgbotapi.MessageConfig
 		log.Println("Received text", update.Message.Text)
 
 		message = tgbotapi.NewMessage(update.Message.Chat.ID, "hello")
-
-		bot.Send(message)
+		var pin tgbotapi.PinChatMessageConfig
+		pin.ChatID = update.Message.Chat.ID
+		pin.MessageID = update.Message.MessageID
+		pin.DisableNotification = false
+		bot.PinChatMessage(pin)
 	}
 }
