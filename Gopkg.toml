@@ -32,3 +32,8 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[metadata.heroku]
+  root-package = "grannys-bot"
+  go-version = "go1.11.2"
+  install = [ "./..." ]
